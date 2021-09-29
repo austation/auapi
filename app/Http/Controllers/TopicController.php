@@ -56,17 +56,17 @@ class TopicController extends Controller
 			if($response['statuscode'] == 200) {
 				// Parse some numeric values into booleans, because byond moment
 				$data = $response['data'];
-				$data['respawn'] = $data['respawn'] ? true : false;
-				$data['enter'] = $data['enter'] ? true : false;
-				$data['vote'] = $data['vote'] ? true : false;
-				$data['ai'] = $data['ai'] ? true : false;
-				$data['hub'] = $data['hub'] ? true : false;
+				$data['respawn'] = (bool) $data['respawn'];
+				$data['enter'] = (bool) $data['enter'];
+				$data['vote'] = (bool) $data['vote'];
+				$data['ai'] = (bool) $data['ai'];
+				$data['hub'] = (bool) $data['hub'];
 				return response()->json($data);
 			} else {
-				return response()->json(['error' => $response['response']], $response['statuscode']);
+				abort($response['statuscode'], $response['response']);
 			}
 		} else {
-			return response()->json(['error' => "Topic communication error"], 500);
+			abort(500, "Topic communication error");
 		}
 	}
 
