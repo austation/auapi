@@ -1,0 +1,246 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "AuAPI",
+        "version": "1.0"
+    },
+    "paths": {
+        "/version": {
+            "get": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "Get current API version",
+                "description": "Returns an object with the current API version",
+                "operationId": "getApiVersion",
+                "responses": {
+                    "200": {
+                        "description": "Current API Version",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/version"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/server/{id}/status": {
+            "get": {
+                "tags": [
+                    "Server"
+                ],
+                "summary": "Get the status of a server",
+                "description": "Returns a detailed description of the current status of a server, depending on the server ID given.",
+                "operationId": "getStatus",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of server to fetch status for",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status data for the target server",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/status"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/servers": {
+            "get": {
+                "tags": [
+                    "Server"
+                ],
+                "summary": "Get a list of servers registered with the API",
+                "description": "Returns an array of the current servers the API is configured to interface with, including IP and port.",
+                "operationId": "getServers",
+                "responses": {
+                    "200": {
+                        "description": "List of registered servers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/server"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "server": {
+                "properties": {
+                    "name": {
+                        "description": "Name of the server",
+                        "type": "string"
+                    },
+                    "ip": {
+                        "description": "IP address of the server",
+                        "type": "string"
+                    },
+                    "port": {
+                        "description": "Port the server is bound to",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "status": {
+                "properties": {
+                    "version": {
+                        "description": "String specifying server codebase version",
+                        "type": "string"
+                    },
+                    "mode": {
+                        "description": "Currently active gamemode on the server",
+                        "type": "string"
+                    },
+                    "respawn": {
+                        "description": "Whether respawning is enabled",
+                        "type": "boolean"
+                    },
+                    "enter": {
+                        "description": "Whether new players can enter the game",
+                        "type": "boolean"
+                    },
+                    "vote": {
+                        "description": "Whether players can create votes",
+                        "type": "boolean"
+                    },
+                    "ai": {
+                        "description": "Whether the AI job is enabled",
+                        "type": "boolean"
+                    },
+                    "host": {
+                        "description": "Name of the server host",
+                        "type": "string"
+                    },
+                    "round_id": {
+                        "description": "Current round ID",
+                        "type": "integer"
+                    },
+                    "players": {
+                        "description": "Number of players online",
+                        "type": "integer"
+                    },
+                    "revision": {
+                        "description": "Currently running Git revision (commit)",
+                        "type": "string"
+                    },
+                    "revision_date": {
+                        "description": "Date of currently running Git revision (commit)",
+                        "type": "string"
+                    },
+                    "hub": {
+                        "description": "Whether the server is listed on the BYOND hub",
+                        "type": "boolean"
+                    },
+                    "admins": {
+                        "description": "Current number of online admins",
+                        "type": "integer"
+                    },
+                    "gamestate": {
+                        "description": "Indicates the current state of the game: 0 = Server Starting, 1 = Pregame Lobby, 2 = Starting Game, 3 = Game Running (Playing), 4 = Round Over",
+                        "type": "integer"
+                    },
+                    "map_name": {
+                        "description": "Currently active map",
+                        "type": "string"
+                    },
+                    "security_level": {
+                        "description": "Current security level (can be \"green\", \"blue\", \"red\" or \"delta\")",
+                        "type": "string"
+                    },
+                    "round_duration": {
+                        "description": "Time the round has been running, in seconds",
+                        "type": "integer"
+                    },
+                    "time_dilation_current": {
+                        "description": "Current server time dilation (percentage)",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "time_dilation_avg": {
+                        "description": "Averaged time dilation",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "time_dilation_avg_slow": {
+                        "description": "Averaged time dilation over a longer period",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "time_dilation_avg_fast": {
+                        "description": "Averaged time dilation over a shorter period",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "soft_popcap": {
+                        "description": "Number of living players at which new players will receive a warning about high population",
+                        "type": "integer"
+                    },
+                    "hard_popcap": {
+                        "description": "Number of living players at which new players will be unable to spawn on the station",
+                        "type": "integer"
+                    },
+                    "extreme_popcap": {
+                        "description": "Number of living players at which players will be unable to join the server at all",
+                        "type": "integer"
+                    },
+                    "popcap": {
+                        "description": "General value which is the maximum of soft, hard and extreme popcap values",
+                        "type": "integer"
+                    },
+                    "shuttle_mode": {
+                        "description": "Current state of the emergency shuttle: \"idle, \"igniting\", \"recalled\", \"called\", \"docked\", \"stranded\", \"escape\", \"endgame: game over\", \"recharging\", \"landing\"",
+                        "type": "string"
+                    },
+                    "shuttle_timer": {
+                        "description": "Current time left until the emergency shuttle completes its current operation",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "version": {
+                "properties": {
+                    "version": {
+                        "description": "Current version of the API",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

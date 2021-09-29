@@ -1,0 +1,14 @@
+[
+	{
+		"name": "Server 1",
+		"ip": "127.0.0.1",
+		"port": 2337,
+		"token": "asdfgjkjl"
+	},
+	{
+		"name": "Server 2",
+		"ip": "127.0.0.1",
+		"port": 2338,
+		"token": "asdfgjkjl"
+	}
+]
