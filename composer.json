@@ -1,5 +1,5 @@
 {
-    "name": "mcterra/auapi",
+    "name": "austation/auapi",
     "description": "AuStation API (AuAPI), a collection of assorted endpoints for AuStation.",
     "keywords": ["lumen", "api"],
     "license": "MIT",
