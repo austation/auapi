@@ -120,7 +120,7 @@ class TopicController extends Controller
 		];
 		$query = array_merge($query, $data);
 		$response = $this->topic($id, $query);
-		$decoded = json_decode($response, true);
+		$decoded = json_decode(trim($response), true);
 		return $decoded ? $decoded : $response;
 	}
 
