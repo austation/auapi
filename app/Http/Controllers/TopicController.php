@@ -45,6 +45,10 @@ class TopicController extends Controller
 	 * 			@OA\JsonContent(ref="#/components/schemas/status")
 	 * 		),
 	 * 		@OA\Response(
+	 * 			response=404,
+	 * 			description="Server ID doesn't exist"
+	 * 		),
+	 * 		@OA\Response(
 	 * 			response=500,
 	 * 			description="Server error"
 	 * 		)
@@ -62,6 +66,51 @@ class TopicController extends Controller
 				$data['ai'] = (bool) $data['ai'];
 				$data['hub'] = (bool) $data['hub'];
 				return response()->json($data);
+			} else {
+				abort($response['statuscode'], $response['response']);
+			}
+		} else {
+			abort(500, "Topic communication error");
+		}
+	}
+
+	/**
+	 * @OA\Get(
+	 * 		path="/server/{id}/players",
+	 * 		summary="Get a list of players currently on the server",
+	 * 		description="Returns a list of ckeys currently logged into the server.",
+	 * 		tags={"Server"},
+	 * 		operationId="getPlayers",
+	 * 		@OA\Parameter(
+	 * 			description="ID of server to fetch player list from",
+	 * 			in="path",
+	 * 			name="id",
+	 * 			required=true,
+	 * 			@OA\Schema(
+	 * 				type="integer",
+	 * 				format="int32"
+	 * 			)
+	 * 		),
+	 * 		@OA\Response(
+	 * 			response=200,
+	 * 			description="Player list from the target server",
+	 * 			@OA\JsonContent(type="array", @OA\Items(type="string"))
+	 * 		),
+	 * 		@OA\Response(
+	 * 			response=404,
+	 * 			description="Server ID doesn't exist"
+	 * 		),
+	 * 		@OA\Response(
+	 * 			response=500,
+	 * 			description="Server error"
+	 * 		)
+	 * )
+	 */
+	public function players($id) {
+		$response = $this->topic_wrapper($id, 'playerlist');
+		if(is_array($response)) {
+			if($response['statuscode'] == 200) {
+				return response()->json($response['data']);
 			} else {
 				abort($response['statuscode'], $response['response']);
 			}
@@ -116,6 +165,9 @@ class TopicController extends Controller
 	 * If possible, string json data is decoded to an associative array.
 	 */
 	private function topic_wrapper($id, $endpoint, $data = []) {
+		if(!$this->servers[$id]) {
+			abort(404, "Server ID not found");
+		}
 		$query = [
 			'auth' => $this->servers[$id]['token'],
 			'source' => "AuAPI",

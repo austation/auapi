@@ -18,6 +18,7 @@ $router->get('/', function() {
 });
 
 $router->get('server/{id}/status', 'TopicController@status');
+$router->get('server/{id}/players', 'TopicController@players');
 $router->get('servers', 'TopicController@servers');
 
 $router->get('version', 'ApiController@version');
