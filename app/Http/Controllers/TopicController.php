@@ -165,7 +165,7 @@ class TopicController extends Controller
 	 * If possible, string json data is decoded to an associative array.
 	 */
 	private function topic_wrapper($id, $endpoint, $data = []) {
-		if(!$this->servers[$id]) {
+		if($id >= count($this->servers)) {
 			abort(404, "Server ID not found");
 		}
 		$query = [
