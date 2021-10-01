@@ -92,11 +92,14 @@ class TopicController extends Controller
 	 * )
 	 */
 	public function servers() {
-		$servTmp = $this->servers;
-		for ($i=0; $i < count($servTmp); $i++) {
-			unset($servTmp[$i]['token']);
+		$outputServers = [];
+		for($i=0; $i < count($this->servers); $i++) {
+			// Minimize risk of accidental information disclosure
+			$outputServers[$i]['name'] = $this->servers[$i]['name'];
+			$outputServers[$i]['ip'] = $this->servers[$i]['public_ip'];
+			$outputServers[$i]['port'] = $this->servers[$i]['port'];
 		}
-		return response()->json($servTmp);
+		return response()->json($outputServers);
 	}
 
 	/**
