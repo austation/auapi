@@ -6,7 +6,7 @@
  * OA\OpenApi(
  * 		@OA\Info(
  * 			title="AuAPI",
- * 			description="This is a collection of endpoints, which can be used to interact with and read information about AuStation SS13 servers.<br>For support, contact Terra#4852 directly on Discord, or through AuStation's Discord server; https://discord.gg/ZTGQAqB<br>Source code for this API can be found at https://github.com/austation/auapi",
+ * 			description="This is a collection of endpoints, which can be used to interact with and read information about AuStation SS13 servers.<br>For support, contact Terra#4852 directly on Discord, or through [AuStation's Discord server](https://discord.gg/ZTGQAqB)<br>Source code for this API can be found on [GitHub](https://github.com/austation/auapi)",
  * 			version="0.2.0",
  * 			@OA\License(name="MIT", url="https://mit-license.org")
  * 		),
