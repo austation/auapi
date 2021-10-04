@@ -46,11 +46,13 @@ class TopicController extends Controller
 	 * 		),
 	 * 		@OA\Response(
 	 * 			response=404,
-	 * 			description="Server ID doesn't exist"
+	 * 			description="Server ID doesn't exist",
+	 * 			@OA\JsonContent(ref="#/components/schemas/error")
 	 * 		),
 	 * 		@OA\Response(
 	 * 			response=500,
-	 * 			description="Server error"
+	 * 			description="Server error",
+	 * 			@OA\JsonContent(ref="#/components/schemas/error")
 	 * 		)
 	 * )
 	 */
@@ -98,11 +100,13 @@ class TopicController extends Controller
 	 * 		),
 	 * 		@OA\Response(
 	 * 			response=404,
-	 * 			description="Server ID doesn't exist"
+	 * 			description="Server ID doesn't exist",
+	 * 			@OA\JsonContent(ref="#/components/schemas/error")
 	 * 		),
 	 * 		@OA\Response(
 	 * 			response=500,
-	 * 			description="Server error"
+	 * 			description="Server error",
+	 * 			@OA\JsonContent(ref="#/components/schemas/error")
 	 * 		)
 	 * )
 	 */
@@ -136,7 +140,8 @@ class TopicController extends Controller
 	 * 		),
 	 * 		@OA\Response(
 	 * 			response=500,
-	 * 			description="Server error"
+	 * 			description="Server error",
+	 * 			@OA\JsonContent(ref="#/components/schemas/error")
 	 * 		)
 	 * )
 	 */
@@ -192,8 +197,8 @@ class TopicController extends Controller
 		$query = json_encode($query, JSON_FORCE_OBJECT);
 		$query = "\x00\x83" . pack('n', strlen($query) + 6) . "\x00\x00\x00\x00\x00" . $query . "\x00";
 
-		$server = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or exit("Could not create TCP socket");
-		if(!socket_connect($server, $this->servers[$id]['ip'], $this->servers[$id]['port'])) {
+		$server = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+		if(!$server || !socket_connect($server, $this->servers[$id]['ip'], $this->servers[$id]['port'])) {
 			return false;
 		}
 
@@ -232,5 +237,6 @@ class TopicController extends Controller
 				}
 			}
 		}
+		return false;
 	}
 }

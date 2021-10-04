@@ -18,7 +18,8 @@ class ApiController extends Controller
 	* 		),
 	* 		@OA\Response(
 	* 			response=500,
-	* 			description="Server error"
+	* 			description="Server error",
+	* 			@OA\JsonContent(ref="#/components/schemas/error")
 	* 		)
 	* )
 	*/
