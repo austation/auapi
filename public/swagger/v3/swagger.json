@@ -198,6 +198,33 @@
     "components": {
         "schemas": {
             "status": {
+                "required": [
+                    "version",
+                    "mode",
+                    "respawn",
+                    "enter",
+                    "vote",
+                    "ai",
+                    "host",
+                    "round_id",
+                    "players",
+                    "revision",
+                    "revision_date",
+                    "hub",
+                    "admins",
+                    "gamestate",
+                    "map_name",
+                    "security_level",
+                    "round_duration",
+                    "time_dilation_current",
+                    "time_dilation_avg",
+                    "time_dilation_avg_fast",
+                    "time_dilation_avg_slow",
+                    "soft_popcap",
+                    "hard_popcap",
+                    "extreme_popcap",
+                    "popcap"
+                ],
                 "properties": {
                     "version": {
                         "description": "String specifying server codebase version",
@@ -320,6 +347,7 @@
                 ],
                 "properties": {
                     "version": {
+                        "description": "SemVer 2.0.0 string denoting current API version",
                         "type": "string"
                     }
                 },
@@ -333,12 +361,15 @@
                 ],
                 "properties": {
                     "name": {
+                        "description": "Human-readable name of the server",
                         "type": "string"
                     },
                     "ip": {
+                        "description": "IP address the server is live at",
                         "type": "string"
                     },
                     "port": {
+                        "description": "Port the server is running on",
                         "type": "number",
                         "format": "int32"
                     }
@@ -351,6 +382,7 @@
                 ],
                 "properties": {
                     "error": {
+                        "description": "Simple string describing the error",
                         "type": "string"
                     }
                 },

@@ -2,7 +2,12 @@
 
 /**
  * @OA\Schema(schema="status",
- * 		type="object"
+ * 		type="object",
+ * 		required={"version", "mode", "respawn", "enter", "vote", "ai", "host", "round_id",
+ * 		"players", "revision", "revision_date", "hub", "admins", "gamestate", "map_name",
+ * 		"security_level", "round_duration", "time_dilation_current", "time_dilation_avg",
+ * 		"time_dilation_avg_fast", "time_dilation_avg_slow", "soft_popcap", "hard_popcap",
+ * 		"extreme_popcap", "popcap"}
  * )
  */
 class Status

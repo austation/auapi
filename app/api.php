@@ -23,6 +23,7 @@
  * 		required={"version"},
  * 		@OA\Property(
  * 			property="version",
+ * 			description="SemVer 2.0.0 string denoting current API version",
  * 			type="string"
  * 		)
  * )
@@ -35,14 +36,17 @@
  * 		required={"name", "ip", "port"},
  * 		@OA\Property(
  * 			property="name",
+ * 			description="Human-readable name of the server",
  * 			type="string"
  * 		),
  * 		@OA\Property(
  * 			property="ip",
+ * 			description="IP address the server is live at",
  * 			type="string"
  * 		),
  * 		@OA\Property(
  * 			property="port",
+ * 			description="Port the server is running on",
  * 			type="number",
  * 			format="int32"
  * 		)
@@ -56,6 +60,7 @@
  * 		required={"error"},
  * 		@OA\Property(
  * 			property="error",
+ * 			description="Simple string describing the error",
  * 			type="string"
  * 		)
  * )
