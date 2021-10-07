@@ -11,16 +11,16 @@ class TopicController extends Controller
 	 */
 	public $servers;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
 		$json = file_get_contents(__DIR__ . "/../../../servers.json");
 		$this->servers = json_decode($json, true);
-    }
+	}
 
 	/**
 	 * @OA\Get(

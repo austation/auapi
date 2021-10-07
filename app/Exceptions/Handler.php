@@ -12,66 +12,66 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    /**
-     * A list of the exception types that should not be reported.
-     *
-     * @var array
-     */
-    protected $dontReport = [
-        AuthorizationException::class,
-        HttpException::class,
-        ModelNotFoundException::class,
-        ValidationException::class,
-    ];
+	/**
+	 * A list of the exception types that should not be reported.
+	 *
+	 * @var array
+	 */
+	protected $dontReport = [
+		AuthorizationException::class,
+		HttpException::class,
+		ModelNotFoundException::class,
+		ValidationException::class,
+	];
 
-    /**
-     * Report or log an exception.
-     *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Throwable  $exception
-     * @return void
-     *
-     * @throws \Exception
-     */
-    public function report(Throwable $exception)
-    {
-        parent::report($exception);
-    }
+	/**
+	 * Report or log an exception.
+	 *
+	 * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+	 *
+	 * @param  \Throwable  $exception
+	 * @return void
+	 *
+	 * @throws \Exception
+	 */
+	public function report(Throwable $exception)
+	{
+		parent::report($exception);
+	}
 
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
-     *
-     * @throws \Throwable
-     */
-    public function render($request, Throwable $exception)
-    {
-        return parent::render($request, $exception);
-    }
+	/**
+	 * Render an exception into an HTTP response.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Throwable  $exception
+	 * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+	 *
+	 * @throws \Throwable
+	 */
+	public function render($request, Throwable $exception)
+	{
+		return parent::render($request, $exception);
+	}
 
 	// This is an override to modify the formatting on the output a bit, so it matches for API errors.
 	/**
-     * Convert the given exception to an array.
-     *
-     * @param  \Throwable  $e
-     * @return array
-     */
-    protected function convertExceptionToArray(Throwable $e)
-    {
-        return config('app.debug', false) ? [
-            'message' => $e->getMessage(),
-            'exception' => get_class($e),
-            'file' => $e->getFile(),
-            'line' => $e->getLine(),
-            'trace' => collect($e->getTrace())->map(function ($trace) {
-                return Arr::except($trace, ['args']);
-            })->all(),
-        ] : [
-            'error' => $this->isHttpException($e) ? $e->getMessage() : 'Server Error',
-        ];
-    }
+	 * Convert the given exception to an array.
+	 *
+	 * @param  \Throwable  $e
+	 * @return array
+	 */
+	protected function convertExceptionToArray(Throwable $e)
+	{
+		return config('app.debug', false) ? [
+			'message' => $e->getMessage(),
+			'exception' => get_class($e),
+			'file' => $e->getFile(),
+			'line' => $e->getLine(),
+			'trace' => collect($e->getTrace())->map(function ($trace) {
+				return Arr::except($trace, ['args']);
+			})->all(),
+		] : [
+			'error' => $this->isHttpException($e) ? $e->getMessage() : 'Server Error',
+		];
+	}
 }

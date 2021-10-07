@@ -14,7 +14,7 @@
 */
 
 $router->get('/', function() {
-    return response(file_get_contents(__DIR__ . "/../public/swagger/v3/index.html"));
+	return response(file_get_contents(__DIR__ . "/../public/swagger/v3/index.html"));
 });
 
 $router->get('server/{id}/status', 'TopicController@status');
@@ -22,4 +22,3 @@ $router->get('server/{id}/players', 'TopicController@players');
 $router->get('servers', 'TopicController@servers');
 
 $router->get('version', 'ApiController@version');
-
