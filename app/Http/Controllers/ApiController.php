@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Response;
+
 class ApiController extends Controller
 {
 	/**
@@ -24,6 +26,6 @@ class ApiController extends Controller
 	* )
 	*/
 	public function version() {
-		return response()->json(['version' => env('APP_VERSION')]);
+		return Response::json(['version' => env('APP_VERSION')]);
 	}
 }
