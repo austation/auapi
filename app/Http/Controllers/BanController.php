@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ban;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 
 class BanController extends Controller

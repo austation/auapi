@@ -149,6 +149,7 @@ class TopicController extends Controller
 		$outputServers = [];
 		for($i=0; $i < count($this->servers); $i++) {
 			// Minimize risk of accidental information disclosure
+			$outputServers[$i]['id'] = $i;
 			$outputServers[$i]['name'] = $this->servers[$i]['name'];
 			$outputServers[$i]['ip'] = $this->servers[$i]['public_ip'];
 			$outputServers[$i]['port'] = $this->servers[$i]['port'];

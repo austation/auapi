@@ -7,7 +7,7 @@
             "name": "MIT",
             "url": "https://mit-license.org"
         },
-        "version": "0.3.0"
+        "version": "0.4.0"
     },
     "servers": [
         {
@@ -485,6 +485,11 @@
                     "port"
                 ],
                 "properties": {
+                    "id": {
+                        "description": "Numeric identifier for the server, used to access API endpoints",
+                        "type": "number",
+                        "format": "int32"
+                    },
                     "name": {
                         "description": "Human-readable name of the server",
                         "type": "string"
