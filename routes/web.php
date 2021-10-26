@@ -21,4 +21,6 @@ $router->get('server/{id}/status', 'TopicController@status');
 $router->get('server/{id}/players', 'TopicController@players');
 $router->get('servers', 'TopicController@servers');
 
+$router->get('bans', 'BanController@bans');
+
 $router->get('version', 'ApiController@version');

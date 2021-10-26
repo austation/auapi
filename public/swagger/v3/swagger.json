@@ -7,7 +7,7 @@
             "name": "MIT",
             "url": "https://mit-license.org"
         },
-        "version": "0.2.0"
+        "version": "0.3.0"
     },
     "servers": [
         {
@@ -31,6 +31,131 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/version"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/bans": {
+            "get": {
+                "tags": [
+                    "Bans"
+                ],
+                "summary": "Get a list of bans from the database, based on given parameters",
+                "description": "Returns an object containing a list of bans, along with metadata about the response.",
+                "operationId": "getBans",
+                "parameters": [
+                    {
+                        "name": "ckey",
+                        "in": "query",
+                        "description": "Key of banned player to search for",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "a_ckey",
+                        "in": "query",
+                        "description": "Key of the banning admin to search for",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "after",
+                        "in": "query",
+                        "description": "Select bans after the given ID (inclusive)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "before",
+                        "in": "query",
+                        "description": "Select bans before the given ID (inclusive)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Maximum number of bans per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Selects which page to retrieve",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "reverse",
+                        "in": "query",
+                        "description": "Whether bans should be retrieved in reverse order (oldest->newest)",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of registered servers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "total_rows": {
+                                            "description": "Total number of bans that matched given criteria",
+                                            "type": "number",
+                                            "format": "int32"
+                                        },
+                                        "rows": {
+                                            "description": "Number of bans in the current page",
+                                            "type": "number",
+                                            "format": "int32"
+                                        },
+                                        "pages": {
+                                            "description": "Number of pages available for selection",
+                                            "type": "number",
+                                            "format": "int32"
+                                        },
+                                        "bans": {
+                                            "description": "Array of ban objects retrieved",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ban"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -384,6 +509,82 @@
                     "error": {
                         "description": "Simple string describing the error",
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ban": {
+                "required": [
+                    "id",
+                    "bantime",
+                    "round_id",
+                    "role",
+                    "expiration_time",
+                    "reason",
+                    "ckey",
+                    "a_ckey",
+                    "unbanned_datetime",
+                    "unbanned_ckey",
+                    "unbanned_round_id",
+                    "server_name",
+                    "global_ban"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Numeric ID for the ban",
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    "bantime": {
+                        "description": "Timestamp for when the ban was applied as 'YYYY-MM-DD HH:MM:SS' Timestamp in 24 hour format",
+                        "type": "string"
+                    },
+                    "round_id": {
+                        "description": "Round ID when the ban was applied",
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    "role": {
+                        "description": "Role the ban is for",
+                        "type": "string"
+                    },
+                    "expiration_time": {
+                        "description": "Timestamp for when the ban will expire. NULL if permanent",
+                        "type": "string"
+                    },
+                    "reason": {
+                        "description": "Admin-provided reason the ban was applied",
+                        "type": "string"
+                    },
+                    "ckey": {
+                        "description": "Player key the ban applies to",
+                        "type": "string"
+                    },
+                    "a_ckey": {
+                        "description": "Key of the banning admin",
+                        "type": "string"
+                    },
+                    "unbanned_datetime": {
+                        "description": "Timestamp for when the ban was removed. NULL if ban still active",
+                        "type": "string"
+                    },
+                    "unbanned_ckey": {
+                        "description": "Key of the unbanning admin. NULL if ban still active",
+                        "type": "string"
+                    },
+                    "unbanned_round_id": {
+                        "description": "Round ID when the ban was removed. NULL if ban still active",
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    "server_name": {
+                        "description": "Name of the server the player was banned on",
+                        "type": "string"
+                    },
+                    "global_ban": {
+                        "description": "Whether the ban applies to all servers sharing the database (0 or 1)",
+                        "type": "number",
+                        "format": "int32"
                     }
                 },
                 "type": "object"
