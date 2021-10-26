@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Response;
-
 class TopicController extends Controller
 {
 	/**
@@ -69,7 +67,7 @@ class TopicController extends Controller
 				$data['vote'] = (bool) $data['vote'];
 				$data['ai'] = (bool) $data['ai'];
 				$data['hub'] = (bool) $data['hub'];
-				return Response::json($data);
+				return response()->json($data);
 			} else {
 				abort($response['statuscode'], $response['response']);
 			}
@@ -116,7 +114,7 @@ class TopicController extends Controller
 		$response = $this->topic_wrapper($id, 'playerlist');
 		if(is_array($response)) {
 			if($response['statuscode'] == 200) {
-				return Response::json($response['data']);
+				return response()->json($response['data']);
 			} else {
 				abort($response['statuscode'], $response['response']);
 			}
@@ -155,7 +153,7 @@ class TopicController extends Controller
 			$outputServers[$i]['ip'] = $this->servers[$i]['public_ip'];
 			$outputServers[$i]['port'] = $this->servers[$i]['port'];
 		}
-		return Response::json($outputServers);
+		return response()->json($outputServers);
 	}
 
 	/**
