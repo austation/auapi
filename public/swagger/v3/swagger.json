@@ -7,7 +7,7 @@
             "name": "MIT",
             "url": "https://mit-license.org"
         },
-        "version": "0.4.1"
+        "version": "0.4.2"
     },
     "servers": [
         {
@@ -127,7 +127,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of registered servers",
+                        "description": "Collection of bans along with metadata about the results",
                         "content": {
                             "application/json": {
                                 "schema": {

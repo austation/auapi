@@ -7,7 +7,7 @@
  * 		@OA\Info(
  * 			title="AuAPI",
  * 			description="This is a collection of endpoints, which can be used to interact with and read information about AuStation SS13 servers.<br>For support, contact Terra#4852 directly on Discord, or through [AuStation's Discord server](https://discord.gg/ZTGQAqB)<br>Source code for this API can be found on [GitHub](https://github.com/austation/auapi)",
- * 			version="0.4.1",
+ * 			version="0.4.2",
  * 			@OA\License(name="MIT", url="https://mit-license.org")
  * 		),
  * 		@OA\Server(description="AuStation API", url="https://api.austation.net")

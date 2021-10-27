@@ -83,7 +83,7 @@ class BanController extends Controller
 	 * 		),
 	 * 		@OA\Response(
 	 * 			response=200,
-	 * 			description="List of registered servers",
+	 * 			description="Collection of bans along with metadata about the results",
 	 * 			@OA\JsonContent(
 	 * 				@OA\Property(
 	 * 					property="total_rows",
