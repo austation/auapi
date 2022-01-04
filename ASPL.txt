@@ -61,10 +61,8 @@ AuStation Public License (ASPL) Version 1.0
     Contributor Version.
 
 1.12. "Secondary License"
-    means either the GNU General Public License, Version 2.0, the GNU
-    Lesser General Public License, Version 2.1, the GNU Affero General
-    Public License, Version 3.0, or any later versions of those
-    licenses.
+    means the GNU Affero General Public License, Version 3.0, or any
+	later version of this license.
 
 1.13. "Source Code Form"
     means the form of the work preferred for making modifications.
@@ -178,14 +176,14 @@ If You distribute Covered Software in Executable Form then:
     license for the Executable Form does not attempt to limit or alter
     the recipients' rights in the Source Code Form under this License.
 
-3.3. Distribution through a Network
-
-You must prominently offer all users interacting with the Executable Form
-remotely through a computer network (if the Covered Software supports
-such interaction) an opportunity to receive the Source Code Form of Your
-Contributer Version, by providing access to the Source Code Form from a
-network server at no charge, through some standard or customary means of
-facilitating copying of software.
+Section 3.2 also applies if users interact with the Executable Form of the
+Covered Software through means of a network connection (if the Covered Software
+supports such interaction). If this is the case: in addition to the terms in
+Section 3.1; You must offer all users interacting with the Executable Form
+remotely through a computer network an opportunity to receive the
+Source Code Form of the Covered Software, by providing access to the
+Source Code Form from a network server at no charge, through some standard
+or customary means of facilitating copying of software.
 
 3.3. Distribution of a Larger Work
 
